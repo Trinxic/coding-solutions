@@ -1,5 +1,12 @@
-n: int = int(input("Max integer: "))
-nums_list: list[str] = input("Nums: ").split()
+def find_missing_number(n: int, nums: list[int]) -> int:
+    return int(n * (n + 1) / 2 - sum(nums))
 
-# sum(1 to n) - sum(nums_list) = missing number
-print(int(n * (n + 1) / 2 - sum([int(n) for n in nums_list])))
+
+def main():
+    n = int(input())
+    nums = [int(n) for n in input().split()]
+    print(find_missing_number(n, nums))
+
+
+if __name__ == "__main__":
+    main()
