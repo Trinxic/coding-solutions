@@ -17,5 +17,5 @@ class Solution:
         if zero_ind != -1:
             return zero_ind * [0] + [prod] + (len_nums - zero_ind - 1) * [0]
 
-        return [prod//num for num in nums]
+        return [(prod//num) for num in nums]
 # @leet end
