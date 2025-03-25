@@ -1,0 +1,28 @@
+# @leet start
+class Solution:
+    def threeSum(self, nums: list[int]) -> list[list[int]]:
+        nums.sort()
+        ans: list[list[int]] = []
+        nums_len: int = len(nums)
+        for i, num in enumerate(nums):  # complete 2Sum for 'each' element in nums
+            if num > 0:  # sum(3 positives) != 0
+                break
+            if i > 0 and num == nums[i - 1]:  # ignore dupes (dupe a ([a,b,c]))
+                continue
+
+            # 2sum-sorted (with potential dupes):
+            left, right = i + 1, nums_len - 1
+            while left < right:
+                sum_3 = num + nums[left] + nums[right]
+                if sum_3 > 0:
+                    right -= 1  # needs to be less positive
+                elif sum_3 < 0:
+                    left += 1   # needs to be more positive
+                else:
+                    ans.append([num, nums[left], nums[right]])
+                    left += 1
+                    right -= 1
+                    while nums[left] == nums[left - 1] and left < right:
+                        left += 1  # bypass dupes
+        return ans
+# @leet end

@@ -1,0 +1,50 @@
+# @leet start
+class Solution:
+    def carFleet(self, target: int, position: list[int], speed: list[int]) -> int:
+        ans: int = 0
+        # num_cars: int = len(position)
+        time_left: dict[int:int] = {
+            pos: (target - pos) / spd
+            for pos, spd in sorted(zip(position, speed), reverse=True)
+        }
+        slowest: int = float("-inf")
+        for pos, time in time_left.items():
+            if time > slowest:
+                slowest = time
+                ans += 1
+        return ans
+
+
+# @leet end
+
+"""
+ - any cars with identical speeds will be in their own fleet
+       freq. of speeds points to min fleet number
+ - 
+
+ - time-to-catch-up = (Sa - Sb) / (Vb - Va)
+ - P = S + V(time)
+ - if 0 < P < target: fleet joined
+
+ * dist. to target => target - position[i]
+ * time to target  => (target - position[i]) / speed[i]
+
+speed:
+           T
+         2
+       4
+1
+    1
+  3
+           T
+
+time:
+           T
+         1
+       1
+12
+    7
+  3
+           T
+
+"""
